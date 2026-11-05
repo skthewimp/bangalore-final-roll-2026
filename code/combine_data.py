@@ -11,8 +11,8 @@ import pyarrow.parquet as pq
 
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--source', type=Path, default=Path('data'))
-parser.add_argument('--output', type=Path, default=Path('data_combined'))
+parser.add_argument('--source', type=Path, required=True, help='Folder containing ac_*/part_*.parquet booth files')
+parser.add_argument('--output', type=Path, default=Path('data'))
 args = parser.parse_args()
 source = args.source.resolve()
 output = args.output.resolve()

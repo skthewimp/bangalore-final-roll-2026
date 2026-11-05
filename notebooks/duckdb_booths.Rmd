@@ -15,7 +15,7 @@ library(ggplot2)
 library(scales)
 
 root <- path.expand("~/Documents/work/data_work/bangalore/voters/final_roll_2026")
-data_dir <- file.path(root, "data_combined")
+data_dir <- file.path(root, "data")
 
 dbConnect(duckdb()) ->
   con

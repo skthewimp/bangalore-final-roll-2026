@@ -7,7 +7,6 @@ benchmark/results/
 __pycache__/
 *.py[cod]
 *.sqlite*
-*.parquet*
 *.csv
 *.pdf*
 *.png

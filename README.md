@@ -21,13 +21,14 @@ as CSV or Parquet. Its key is `(ac, part)`, one row per polling part. It include
 card, deletion and retained gender counts, plus an accepted-exception indicator.
 Names, EPIC numbers, individual records, addresses and raw OCR are excluded.
 
-The complete internal Parquet dataset occupies 729,424,992 bytes (about 729 MB).
+The complete internal Parquet dataset occupies about 545 MB in 28 constituency files.
 Size would fit a GitHub Release: the [per-asset limit is 2 GiB](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases).
 The released dataset here is the aggregate version. See [the data guide](docs/data.md).
 
 ## Local aggregate analysis
 
-The [R notebooks](notebooks/) read only `data_combined/`:
+The [R notebooks](notebooks/) read `data/`, with one file per constituency
+(`data/ac_150.parquet`, etc.):
 
 - [Arrow: constituency counts and deletion shares](notebooks/arrow_constituencies.Rmd)
 - [DuckDB: polling-part size comparisons](notebooks/duckdb_booths.Rmd)
@@ -44,12 +45,14 @@ records, occupying 545,177,622 bytes. Deleted records remain in it. Use
 distinct person. The combined files are a frozen snapshot; later booth repairs
 require rebuilding them.
 
-`code/combine_data.py` builds this folder from `data/`, checks uniqueness of
+`code/combine_data.py` builds this folder from a booth-level export, checks uniqueness of
 `(ac, part, page, card)`, preserves booth metadata and verifies every output
 against its source records. It needs Python `duckdb` and `pyarrow` in your
-existing environment. Run `python code/combine_data.py` from the repository root,
-or choose a new destination with `--output`. It refuses an existing destination
-and leaves the source files untouched. Detailed Parquet files remain local
+existing environment. Run `python code/combine_data.py --source /path/to/booth-export`
+from the repository root, or choose a new destination with `--output`. It refuses
+an existing destination and leaves the source files untouched. The OCR pipeline
+keeps its booth-level layout under `production/`; `data/` is the compact analysis
+snapshot. Detailed Parquet files remain local
 and are excluded from Git.
 
 API references: [Arrow datasets](https://arrow.apache.org/docs/r/reference/open_dataset.html)
