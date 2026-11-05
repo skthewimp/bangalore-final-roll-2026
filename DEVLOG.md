@@ -67,3 +67,17 @@
 Remaining limitations: OCR is not ground truth; the 16 accepted booths retain
 their exceptions; platform OCR differences prevent a byte-identical rerun
 promise. The public count release does not expose the detailed person records.
+
+<!-- codex-session:01a1aa1c-7110-7ae1-b8f5-bf523e823af1:start -->
+## 2026-11-05 10:39 IST | Codex session `01a1aa1c-711`
+
+### User prompts
+> show me top 10 rows of data_combined
+> create a CSV from data_combined .
+> wait is that all the columns? i thought we had more
+
+### Work done
+- Created [data_combined.csv](/Users/Karthik/Documents/work/data_work/bangalore/voters/final_roll_2026/data_combined.csv): **5,974,040 rows, 32 columns, 2.91 GB**. Row count verified; physical-card keys are unique. All...
+- `polling_area_details` and `polling_station_details` contain the **raw multiline header text** from the roll. Their structured versions remain in the CSV. For the first row: | Removed column | Example content | Kept a...
+
+<!-- codex-session:01a1aa1c-7110-7ae1-b8f5-bf523e823af1:end -->
