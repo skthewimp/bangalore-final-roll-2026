@@ -30,6 +30,6 @@ __pycache__/
 .agents/
 SERVER.md
 RUNNING.md
-launch_agent.plist
-helper_agent.plist
-hash-mark.npy
+code/launch_agent.plist
+code/helper_agent.plist
+code/hash-mark.npy

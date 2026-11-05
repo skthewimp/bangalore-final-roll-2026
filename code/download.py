@@ -62,7 +62,7 @@ downloaded = skipped = failed = 0
 # never leaves an incomplete PDF that would be mistaken for a completed booth.
 for index, (ac, part) in enumerate(jobs, 1):
     url = SOURCE["url_template"].format(ac=ac, part=part, language=args.language)
-    destination = ROOT / "raw" / args.language / str(ac) / url.rsplit("/", 1)[1]
+    destination = ROOT.parent / "raw" / args.language / str(ac) / url.rsplit("/", 1)[1]
     if destination.exists():
         try:
             with pymupdf.open(destination) as document:

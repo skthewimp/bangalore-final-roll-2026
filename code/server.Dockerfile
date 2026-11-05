@@ -5,9 +5,9 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY requirements.txt .
+COPY code/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY *.py schema.json source.json ./
+COPY code/*.py code/schema.json code/source.json code/accepted-count-exceptions.json ./
 RUN python fetch_ocr_template.py
 
 ENV OMP_THREAD_LIMIT=1 OPENBLAS_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1

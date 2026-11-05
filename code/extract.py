@@ -233,7 +233,7 @@ def read_page_image(image, page_number):
 
 def read_cached_page(job):
     pdf_path, page_number, digest = job
-    cache = ROOT / "pilot" / "ocr-cache" / digest / f"{page_number}.json"
+    cache = ROOT.parent / "pilot" / "ocr-cache" / digest / f"{page_number}.json"
     if cache.exists():
         return json.loads(cache.read_text())
     result = read_page((pdf_path, page_number))
@@ -302,12 +302,12 @@ if __name__ == "__main__":
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--pages", type=int, help="Read only the first N pages per PDF")
     args = parser.parse_args()
-    output_dir = ROOT / "pilot"
+    output_dir = ROOT.parent / "pilot"
     output_dir.mkdir(exist_ok=True)
     all_records = []
     source = json.loads((ROOT / "source.json").read_text())
     constituency_names = {row["ac"]: row["name"] for row in source["constituencies"]}
-    for pdf_path in sorted((ROOT / "raw" / "ENG").glob("*/*.pdf")):
+    for pdf_path in sorted((ROOT.parent / "raw" / "ENG").glob("*/*.pdf")):
         ac = int(pdf_path.parent.name)
         if ac not in args.ac:
             continue

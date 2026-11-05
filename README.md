@@ -44,10 +44,10 @@ records, occupying 545,177,622 bytes. Deleted records remain in it. Use
 distinct person. The combined files are a frozen snapshot; later booth repairs
 require rebuilding them.
 
-`combine_data.py` builds this folder from `data/`, checks uniqueness of
+`code/combine_data.py` builds this folder from `data/`, checks uniqueness of
 `(ac, part, page, card)`, preserves booth metadata and verifies every output
 against its source records. It needs Python `duckdb` and `pyarrow` in your
-existing environment. Run `python combine_data.py` from the repository root,
+existing environment. Run `python code/combine_data.py` from the repository root,
 or choose a new destination with `--output`. It refuses an existing destination
 and leaves the source files untouched. Detailed Parquet files remain local
 and are excluded from Git.
@@ -68,14 +68,14 @@ existing interpreter and run:
 
 ```bash
 export PYTHON=/absolute/path/to/your/python
-uv pip install --python "$PYTHON" -r requirements.txt
-"$PYTHON" fetch_ocr_template.py
-"$PYTHON" production.py init --directory production
-"$PYTHON" production.py run --directory production --ac 162 --part 1 --workers 2 --max-booths 1
-"$PYTHON" production.py status --directory production
+uv pip install --python "$PYTHON" -r code/requirements.txt
+"$PYTHON" code/fetch_ocr_template.py
+"$PYTHON" code/production.py init --directory production
+"$PYTHON" code/production.py run --directory production --ac 162 --part 1 --workers 2 --max-booths 1
+"$PYTHON" code/production.py status --directory production
 ```
 
-Initialisation uses the checked-in `schema.json`. No pilot voter table or
+Initialisation uses the checked-in `code/schema.json`. No pilot voter table or
 machine-specific files are required. The small numerical `#` classifier
 template is fetched from a pinned upstream revision and checksum-verified;
 see [attribution](THIRD_PARTY_NOTICES.md).
@@ -88,7 +88,7 @@ and worker log to distinguish those outcomes.
 ## Run the configured coverage
 
 ```bash
-"$PYTHON" production.py run --directory production --workers 4
+"$PYTHON" code/production.py run --directory production --workers 4
 ```
 
 This is a long-running OCR job. It processes one booth at a time, with parallel
@@ -98,9 +98,9 @@ The 9,008 configured part counts come from an upstream transcription, not a
 fresh discovery of every official source URL.
 
 ```bash
-"$PYTHON" production.py pause --directory production
-"$PYTHON" production.py resume --directory production
-"$PYTHON" production.py run --directory production --workers 4
+"$PYTHON" code/production.py pause --directory production
+"$PYTHON" code/production.py resume --directory production
+"$PYTHON" code/production.py run --directory production --workers 4
 ```
 
 `resume` clears the persistent pause flag. Start `run` again for a foreground
@@ -113,9 +113,9 @@ for unattended work.
 Stop other writers before changing review outputs.
 
 ```bash
-"$PYTHON" automated_review.py --directory production --workers 2
-"$PYTHON" automated_review.py --directory production --workers 2 --apply
-"$PYTHON" production.py status --directory production
+"$PYTHON" code/automated_review.py --directory production --workers 2
+"$PYTHON" code/automated_review.py --directory production --workers 2 --apply
+"$PYTHON" code/production.py status --directory production
 ```
 
 The first command records decisions without promotion. The second promotes
@@ -125,8 +125,8 @@ were explicitly accepted as count/OCR exceptions, with their discrepancies
 kept in metadata and row flags:
 
 ```bash
-"$PYTHON" accept_review_exceptions.py --directory production
-"$PYTHON" accept_review_exceptions.py --directory production --apply
+"$PYTHON" code/accept_review_exceptions.py --directory production
+"$PYTHON" code/accept_review_exceptions.py --directory production --apply
 ```
 
 Those decisions are specific to the documented snapshot. The script checks
@@ -142,10 +142,10 @@ uses `csv.QUOTE_NONE`. A fresh run should not need this repair sequence, but the
 tools used to repair the historical tables are included:
 
 ```bash
-"$PYTHON" prepare_ocr_repairs.py --directory production
-"$PYTHON" repair_ocr_text.py --directory production --workers 3
-"$PYTHON" refine_ocr_headers.py --directory production
-"$PYTHON" apply_ocr_repairs.py --directory production
+"$PYTHON" code/prepare_ocr_repairs.py --directory production
+"$PYTHON" code/repair_ocr_text.py --directory production --workers 3
+"$PYTHON" code/refine_ocr_headers.py --directory production
+"$PYTHON" code/apply_ocr_repairs.py --directory production
 ```
 
 The repair re-reads the affected page-column groups, verifies original PDF
@@ -157,9 +157,9 @@ The repair recovered 789 missing names, 702 ages and 867 gender readings.
 ## Export counts and delete source media
 
 ```bash
-"$PYTHON" aggregate_public_data.py --directory production --output release-data
-"$PYTHON" cleanup_media.py --directory production
-"$PYTHON" cleanup_media.py --directory production --apply
+"$PYTHON" code/aggregate_public_data.py --directory production --output release-data
+"$PYTHON" code/cleanup_media.py --directory production
+"$PYTHON" code/cleanup_media.py --directory production --apply
 ```
 
 The exporter checks the public `(ac, part)` key and coverage, and constructs
@@ -173,17 +173,21 @@ cleanup, a PDF-based recheck requires downloading the original source again.
 
 ## Files and further documentation
 
+Pipeline code, runtime configuration and deployment files live in `code/`.
+Run the commands above from the repository root. Data stays in its existing
+folders; notebooks, tests and benchmarks each have their own directory.
+
 | File | Purpose |
 |---|---|
-| `source.json`, `schema.json` | Configured coverage, URLs and 45-column table schema |
-| `production.py`, `worker.py` | Frozen runtime, queue, checkpoints, validation and atomic writes |
-| `extract.py`, `context.py`, `totals.py` | Card fields, section/cover context, markers and printed totals |
-| `automated_review.py` | Targeted cover, map-page and deletion-marker review |
-| `accepted-count-exceptions.json` | Non-personal snapshot decisions and source fingerprints |
-| `shared_queue.py`, `local_helper.py` | Coordinated contribution from a second machine |
-| `prepare_ocr_repairs.py`, `repair_ocr_text.py`, `refine_ocr_headers.py`, `apply_ocr_repairs.py` | Historical parser repair and verified import |
-| `download.py`, `extract.py` | Optional standalone downloader and five-PDF exploration pilot |
-| `cleanup_media.py`, `aggregate_public_data.py` | Source-media deletion and public booth counts |
+| `code/source.json`, `code/schema.json` | Configured coverage, URLs and 45-column table schema |
+| `code/production.py`, `code/worker.py` | Frozen runtime, queue, checkpoints, validation and atomic writes |
+| `code/extract.py`, `code/context.py`, `code/totals.py` | Card fields, section/cover context, markers and printed totals |
+| `code/automated_review.py` | Targeted cover, map-page and deletion-marker review |
+| `code/accepted-count-exceptions.json` | Non-personal snapshot decisions and source fingerprints |
+| `code/shared_queue.py`, `code/local_helper.py` | Coordinated contribution from a second machine |
+| `code/prepare_ocr_repairs.py`, `code/repair_ocr_text.py`, `code/refine_ocr_headers.py`, `code/apply_ocr_repairs.py` | Historical parser repair and verified import |
+| `code/download.py`, `code/extract.py` | Optional standalone downloader and five-PDF exploration pilot |
+| `code/cleanup_media.py`, `code/aggregate_public_data.py` | Source-media deletion and public booth counts |
 
 - [Method, validation and limitations](docs/method.md)
 - [Schema and public data](docs/data.md)

@@ -28,7 +28,7 @@ from the CI artifact workflow.
 
 ## Detailed local schema
 
-`schema.json` defines the 45 columns used by extraction. One row is one card,
+`code/schema.json` defines the 45 columns used by extraction. One row is one card,
 keyed by `(ac, part, page, card)`. Detailed tables stay local/private.
 
 | Group | Columns |

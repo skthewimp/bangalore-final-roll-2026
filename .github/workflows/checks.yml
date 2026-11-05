@@ -11,8 +11,9 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-      - run: pip install -r requirements.txt
-      - run: python fetch_ocr_template.py
+          cache-dependency-path: code/requirements.txt
+      - run: pip install -r code/requirements.txt
+      - run: python code/fetch_ocr_template.py
       - run: python -m unittest discover -s tests -v
       - name: Reject accidental data or media in Git
         run: |
@@ -28,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -f server.Dockerfile -t roll-check .
+      - run: docker build -f code/server.Dockerfile -t roll-check .
       - run: |
           mkdir smoke
           docker run --rm -v "$PWD/smoke:/data" roll-check init --directory /data

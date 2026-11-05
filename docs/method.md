@@ -2,7 +2,7 @@
 
 ## Source and unit of observation
 
-`source.json` selects ACs 150 through 177, with an expected part count for each.
+`code/source.json` selects ACs 150 through 177, with an expected part count for each.
 The official URL pattern supplies separate English and Kannada PDFs. Production
 reads the English edition. The PDF pages are raster scans, so this pipeline
 uses image OCR rather than pretending that PDF text extraction is sufficient.
@@ -76,7 +76,7 @@ that evidence in `roll_validation` metadata.
 The historical pass cleared 354 booths, excluded 127 false map/QR detections
 and recovered 62 deletion markers. Sixteen booths retained cover-reading or
 small card/deletion discrepancies. Their explicit acceptance is recorded in
-`accepted-count-exceptions.json`. Accepted rows carry
+`code/accepted-count-exceptions.json`. Accepted rows carry
 `accepted_booth_validation_exception`; failed checks remain in their footer
 metadata. Another known map detection was excluded when those booths were
 included. The final snapshot has 5,974,040 cards across all 9,008 parts.

@@ -7,14 +7,14 @@ Python requirements, and checksum-verifies the external numerical template.
 It does not depend on a pre-existing benchmark image or private pilot tables.
 
 ```bash
-docker build -f server.Dockerfile -t bangalore-final-roll:local .
+docker build -f code/server.Dockerfile -t bangalore-final-roll:local .
 mkdir -p production
 docker run --rm --user "$(id -u):$(id -g)" \
   -v "$PWD/production:/data" bangalore-final-roll:local init --directory /data
-bash server-run.sh
+bash code/server-run.sh
 ```
 
-`server-run.sh` mounts only `production/`, limits the job to two CPUs and
+`code/server-run.sh` mounts only `production/`, limits the job to two CPUs and
 1,280 MiB RAM, uses a bounded temporary filesystem and bounded Docker logs,
 and sets `unless-stopped` restart behaviour. Run it from the server's checkout.
 The frozen worker code and schema live in the mounted run directory.
@@ -50,7 +50,7 @@ OCR image.
 After initialising a queue with your chosen existing Python interpreter:
 
 ```bash
-"$PYTHON" install_agent.py --directory production --workers 3
+"$PYTHON" code/install_agent.py --directory production --workers 3
 ```
 
 The installer generates a LaunchAgent using the current checkout and
@@ -62,7 +62,7 @@ explicitly sleeping/shut-down machine processing.
 To stop and unload it:
 
 ```bash
-"$PYTHON" production.py pause --directory production
+"$PYTHON" code/production.py pause --directory production
 launchctl bootout "gui/$(id -u)/org.bangalore.final-roll"
 ```
 
@@ -71,16 +71,16 @@ launchctl bootout "gui/$(id -u)/org.bangalore.final-roll"
 This is optional; a single queue is sufficient. The server ledger is always
 authoritative. Do not initialise two independent queues and merge files by hand.
 
-`shared_queue.py` reserves pending/retry booths atomically under an owner name.
+`code/shared_queue.py` reserves pending/retry booths atomically under an owner name.
 The server claims from the front; the helper reserves from the end. Imports
 verify source identity, pipeline, schema, transfer hashes and physical-card
 keys. A failed upload retains the local output and reservation. Reservations
 are released explicitly, never merely because a timeout elapsed.
 
-On the server, copy `shared_queue.py` to its mounted production directory:
+On the server, copy `code/shared_queue.py` to its mounted production directory:
 
 ```bash
-cp shared_queue.py production/shared_queue.py
+cp code/shared_queue.py production/shared_queue.py
 ```
 
 On the helper, copy the server's frozen runtime and metadata before starting:
@@ -91,7 +91,7 @@ rsync -a server:/srv/bangalore-final-roll/production/code helper/
 rsync -a server:/srv/bangalore-final-roll/production/manifest.json \
   server:/srv/bangalore-final-roll/production/source.json \
   server:/srv/bangalore-final-roll/production/schema.arrow helper/
-"$PYTHON" local_helper.py --server server \
+"$PYTHON" code/local_helper.py --server server \
   --server-directory /srv/bangalore-final-roll/production \
   --owner mac-helper --workers 3 --batch-size 100 --hours 36
 ```
@@ -108,7 +108,7 @@ reservations; do not release that owner's booths while its OCR could be active.
 ## Cleaning up
 
 After all booths are validated or explicitly accepted, stop writers and run
-`cleanup_media.py --directory production --apply`. It retains tables and text
+`code/cleanup_media.py --directory production --apply`. It retains tables and text
 evidence. It does not erase the source URLs or SHA-256 values needed to verify
 a later download. Media cleanup is an explicit final operation, not a reason
 to throw away a failed source during extraction.

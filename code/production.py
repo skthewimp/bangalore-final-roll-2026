@@ -131,7 +131,7 @@ def initialise(root):
             "pipeline_id": digest.hexdigest(),
             "created_at": time.time(),
             "python": sys.executable,
-            "pilot_directory": str(project / "raw" / "ENG"),
+            "pilot_directory": str(project.parent / "raw" / "ENG"),
             "language": "ENG",
             "workers": 4,
             "booths": sum(row["expected_parts"] for row in source["constituencies"]),
@@ -485,7 +485,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["init", "run", "status", "pause", "resume"])
     parser.add_argument(
-        "--directory", type=Path, default=Path(__file__).resolve().parent / "production"
+        "--directory", type=Path, default=Path(__file__).resolve().parents[1] / "production"
     )
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--min-free-gb", type=float, default=5)

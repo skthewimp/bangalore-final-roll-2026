@@ -17,7 +17,7 @@ import pyarrow.parquet as pq
 from durable import atomic_json, cached_json, sync_directory
 
 
-root = Path(__file__).resolve().parent / "production"
+root = Path(__file__).resolve().parents[1] / "production"
 if not (root / "PAUSED").exists():
     raise SystemExit("Pause the queue before a schema migration")
 with (root / "run.lock").open("a") as lock:

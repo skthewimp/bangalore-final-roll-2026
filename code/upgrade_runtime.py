@@ -12,14 +12,14 @@ from production import FILES
 
 
 project = Path(__file__).resolve().parent
-root = project / "production"
+root = project.parent / "production"
 if not (root / "PAUSED").exists():
     raise SystemExit("Pause the queue before upgrading its runtime")
 context_check = json.loads(
-    (project / "benchmark/results/mac-parallel-context.json").read_text()
+    (project.parent / "benchmark/results/mac-parallel-context.json").read_text()
 )
 worker_check = json.loads(
-    (project / "benchmark/results/mac-parallel-worker.json").read_text()
+    (project.parent / "benchmark/results/mac-parallel-worker.json").read_text()
 )
 if (
     not all(row["identical_records"] for row in context_check)

@@ -12,7 +12,7 @@ import time
 
 
 project = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(project))
+sys.path.insert(0, str(project / "code"))
 import context
 from extract import lines_from_words, ocr, parse_card
 

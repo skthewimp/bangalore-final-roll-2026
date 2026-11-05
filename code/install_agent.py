@@ -9,7 +9,7 @@ import sys
 
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--directory', type=Path, default=Path(__file__).resolve().parent / 'production')
+parser.add_argument('--directory', type=Path, default=Path(__file__).resolve().parents[1] / 'production')
 parser.add_argument('--workers', type=int, default=3)
 args = parser.parse_args()
 if sys.platform != 'darwin':
@@ -25,7 +25,7 @@ settings = {
         str(root / 'code' / 'production.py'), 'run',
         '--directory', str(root), '--workers', str(args.workers),
     ],
-    'WorkingDirectory': str(Path(__file__).resolve().parent),
+    'WorkingDirectory': str(Path(__file__).resolve().parents[1]),
     'EnvironmentVariables': {
         'PATH': f'{Path(sys.executable).parent}:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin',
         'OMP_THREAD_LIMIT': '1', 'OPENBLAS_NUM_THREADS': '1', 'PYTHONUNBUFFERED': '1',

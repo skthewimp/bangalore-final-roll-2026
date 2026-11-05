@@ -18,8 +18,8 @@ from scipy import ndimage
 from durable import atomic_json, cached_json
 
 
-ROOT = Path(__file__).resolve().parent
-HASH_TEMPLATE = np.load(ROOT / "hash-mark.npy")
+ROOT = Path(__file__).resolve().parents[1]
+HASH_TEMPLATE = np.load(Path(__file__).resolve().parent / "hash-mark.npy")
 
 
 def read_cover_context(pdf_path, digest, ocr, lines_from_words):

@@ -14,7 +14,7 @@ import pyarrow.parquet as pq
 
 
 project = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(project))
+sys.path.insert(0, str(project / "code"))
 from production import FILES
 
 parser = argparse.ArgumentParser(description=__doc__)
@@ -35,7 +35,7 @@ variants = (
         for index, count in enumerate(args.counts)
     ]
     if args.counts
-    else [("baseline", args.baseline, 4), ("parallel", project, 4)]
+    else [("baseline", args.baseline, 4), ("parallel", project / "code", 4)]
 )
 with tempfile.TemporaryDirectory(prefix="roll-worker-speed-") as temporary:
     for name, code_source, worker_count in variants:

@@ -35,7 +35,7 @@ parser.add_argument('--container', default='bangalore-final-roll')
 parser.add_argument('--owner', default='mac-helper')
 args = parser.parse_args()
 project = Path(__file__).resolve().parent
-root = project / 'helper'
+root = project.parent / 'helper'
 root.mkdir(exist_ok=True)
 lock = (root / 'coordinator.lock').open('w')
 fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)

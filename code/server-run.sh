@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 
 if [[ ! -f production/manifest.json ]]; then
   echo 'Initialise production/ first; see docs/deployment.md.' >&2

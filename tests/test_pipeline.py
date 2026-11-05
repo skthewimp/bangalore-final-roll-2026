@@ -13,10 +13,10 @@ from PIL import Image
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+PROJECT = Path(__file__).resolve().parents[1] / "code"
+sys.path.insert(0, str(PROJECT))
+
 from extract import ocr
-
-
-PROJECT = Path(__file__).resolve().parents[1]
 
 
 class PipelineTests(unittest.TestCase):
