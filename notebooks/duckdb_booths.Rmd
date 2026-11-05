@@ -1,0 +1,106 @@
+---
+title: "Booth sizes with DuckDB"
+output: html_notebook
+---
+
+Do larger constituencies have more polling parts, or larger polling parts?
+Count retained cards within each part before comparing constituencies.
+
+```{r setup}
+library(DBI)
+library(duckdb)
+library(dbplyr)
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+root <- path.expand("~/Documents/work/data_work/bangalore/voters/final_roll_2026")
+data_dir <- file.path(root, "data_combined")
+
+dbConnect(duckdb()) ->
+  con
+
+duckdb::tbl_file(
+  con,
+  file.path(data_dir, "*.parquet")
+) ->
+  cards
+```
+
+```{r booth-counts}
+cards %>%
+  summarise(
+    retained = sum(!is_deleted, na.rm = TRUE),
+    .by = c(ac, constituency_name, part)
+  ) ->
+  booth_counts
+```
+
+Keep zero-retained parts in the comparison. Filtering cards before counting would lose them.
+
+```{r booth-quantiles}
+booth_counts %>%
+  summarise(
+    booths = n(),
+    median_cards = median(retained, na.rm = TRUE),
+    p10 = quantile(retained, 0.1, na.rm = TRUE),
+    p90 = quantile(retained, 0.9, na.rm = TRUE),
+    .by = c(ac, constituency_name)
+  ) %>%
+  collect() ->
+  booth_sizes
+```
+
+```{r booth-size-plot}
+booth_sizes %>%
+  ggplot(aes(y = reorder(constituency_name, median_cards))) +
+  geom_segment(
+    aes(
+      x = p10,
+      xend = p90,
+      yend = reorder(constituency_name, median_cards)
+    ),
+    colour = "#B8B8B8",
+    linewidth = 1
+  ) +
+  geom_point(
+    aes(x = median_cards),
+    colour = "#0072B2",
+    size = 2
+  ) +
+  scale_x_continuous(labels = label_number(accuracy = 1)) +
+  labs(
+    title = "Mahadevapura has the largest median polling part",
+    subtitle = "Dot: median; line: 10th–90th percentile within each constituency",
+    x = "Retained cards per polling part",
+    y = NULL,
+    caption = "Source: November 2026 final-roll card OCR. Retained cards are not deduplicated people."
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank()
+  )
+```
+
+The median part has 753 retained cards in Mahadevapura, against 544 in Dasarahalli.
+Constituency totals alone hide this difference in part size.
+
+Does that line up with how many parts each constituency has?
+
+```{r parts-versus-size}
+booth_sizes %>%
+  summarise(
+    correlation = cor(booths, median_cards),
+    constituencies = n()
+  )
+```
+
+The correlation is 0.43 across the 28 constituencies. More parts and larger parts both contribute to constituency size.
+
+```{r disconnect}
+dbDisconnect(
+  con,
+  shutdown = TRUE
+)
+```

@@ -1,0 +1,93 @@
+---
+title: "Constituency counts with Arrow"
+output: html_notebook
+---
+
+How much does the share of cards marked deleted vary across constituencies?
+One row is a physical card. Keep deleted cards in the denominator for this question.
+
+```{r setup}
+library(arrow)
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+root <- path.expand("~/Documents/work/data_work/bangalore/voters/final_roll_2026")
+data_dir <- file.path(root, "data_combined")
+
+open_dataset(data_dir) ->
+  roll
+```
+
+```{r constituency-counts}
+roll %>%
+  summarise(
+    cards = n(),
+    deleted = sum(is_deleted, na.rm = TRUE),
+    unread = sum(is.na(is_deleted)),
+    .by = c(ac, constituency_name)
+  ) %>%
+  collect() %>%
+  mutate(
+    retained = cards - deleted - unread,
+    deleted_share = deleted / (cards - unread)
+  ) ->
+  constituency_counts
+```
+
+```{r totals}
+constituency_counts %>%
+  summarise(
+    cards = sum(cards),
+    retained = sum(retained),
+    deleted = sum(deleted),
+    unread = sum(unread)
+  )
+```
+
+There are 65,883 deleted cards alongside 5,908,157 retained cards.
+No unread deletion flags in this snapshot.
+
+```{r deletion-plot}
+constituency_counts %>%
+  ggplot(aes(
+    x = deleted_share,
+    y = reorder(constituency_name, deleted_share)
+  )) +
+  geom_point(
+    colour = "#0072B2",
+    size = 2
+  ) +
+  scale_x_continuous(labels = label_percent(accuracy = 0.1)) +
+  labs(
+    title = "Bommanahalli has the highest share of cards marked deleted",
+    subtitle = "28 Bangalore constituencies, November 2026 snapshot",
+    x = "Deleted / all cards with known deletion status",
+    y = NULL,
+    caption = "Source: final-roll card OCR. Includes accepted count exceptions."
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank()
+  )
+```
+
+Bommanahalli is at 2.6%, against 0.2% in Pulakeshinagar.
+These are deletion marks in the final snapshot; they cannot measure how many people were removed since an earlier roll.
+
+What if I only want Jayanagar? Filter the dataset by constituency.
+
+```{r one-constituency}
+roll %>%
+  filter(
+    ac == 173,
+    is_deleted == FALSE
+  ) %>%
+  summarise(
+    retained = n(),
+    female = sum(gender == "Female", na.rm = TRUE),
+    unread_gender = sum(is.na(gender) | gender == "")
+  ) %>%
+  collect()
+```

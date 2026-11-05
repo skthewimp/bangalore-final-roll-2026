@@ -25,6 +25,36 @@ The complete internal Parquet dataset occupies 729,424,992 bytes (about 729 MB).
 Size would fit a GitHub Release: the [per-asset limit is 2 GiB](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases).
 The released dataset here is the aggregate version. See [the data guide](docs/data.md).
 
+## Local aggregate analysis
+
+The [R notebooks](notebooks/) read only `data_combined/`:
+
+- [Arrow: constituency counts and deletion shares](notebooks/arrow_constituencies.Rmd)
+- [DuckDB: polling-part size comparisons](notebooks/duckdb_booths.Rmd)
+- [Arrow → DuckDB: age profiles by gender](notebooks/arrow_duckdb_ages.Rmd)
+
+Open them in RStudio or Positron and run individual chunks. Edit `root` in the
+setup chunk for your checkout. They use `arrow`, `duckdb`, `DBI`, `dbplyr`,
+`dplyr`, `ggplot2` and `scales`; filtering and aggregation happen before
+`collect()`. No notebook needs the original booth files.
+
+The combined folder contains 28 constituency files with all 5,974,040 card
+records, occupying 545,177,622 bytes. Deleted records remain in it. Use
+`is_deleted == FALSE` for retained-card analysis. A card is not necessarily a
+distinct person. The combined files are a frozen snapshot; later booth repairs
+require rebuilding them.
+
+`combine_data.py` builds this folder from `data/`, checks uniqueness of
+`(ac, part, page, card)`, preserves booth metadata and verifies every output
+against its source records. It needs Python `duckdb` and `pyarrow` in your
+existing environment. Run `python combine_data.py` from the repository root,
+or choose a new destination with `--output`. It refuses an existing destination
+and leaves the source files untouched. Detailed Parquet files remain local
+and are excluded from Git.
+
+API references: [Arrow datasets](https://arrow.apache.org/docs/r/reference/open_dataset.html)
+and [Arrow's DuckDB bridge](https://arrow.apache.org/docs/r/reference/to_duckdb.html).
+
 ## Run a small extraction
 
 Use Linux or macOS, Python 3.12 or 3.13, and Tesseract 5 on `PATH`. Windows users
