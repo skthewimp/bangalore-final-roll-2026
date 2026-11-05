@@ -1,0 +1,35 @@
+name: Code checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python fetch_ocr_template.py
+      - run: python -m unittest discover -s tests -v
+      - name: Reject accidental data or media in Git
+        run: |
+          python - <<'PY'
+          import pathlib, subprocess
+          forbidden = {'.parquet', '.csv', '.sqlite', '.pdf', '.png', '.jpg', '.jpeg', '.webp'}
+          files = subprocess.check_output(['git', 'ls-files', '-z']).decode().split('\0')
+          bad = [name for name in files if name and pathlib.Path(name).suffix.lower() in forbidden]
+          if bad:
+              raise SystemExit(f'Runtime data/media must not be committed: {bad}')
+          PY
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -f server.Dockerfile -t roll-check .
+      - run: |
+          mkdir smoke
+          docker run --rm -v "$PWD/smoke:/data" roll-check init --directory /data
+          docker run --rm -v "$PWD/smoke:/data" roll-check status --directory /data

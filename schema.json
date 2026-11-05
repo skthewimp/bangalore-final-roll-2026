@@ -1,0 +1,227 @@
+[
+  {
+    "name": "ac",
+    "type": "int64",
+    "nullable": true
+  },
+  {
+    "name": "constituency_name",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "part",
+    "type": "int64",
+    "nullable": true
+  },
+  {
+    "name": "language",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "source_url",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "pdf_sha256",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "polling_area_details",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "polling_station_details",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "main_town_or_village",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "ward",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "post_office",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "police_station",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "patwari",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "tehsil",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "district",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "pincode",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "polling_station_name",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "polling_station_address",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "page",
+    "type": "int64",
+    "nullable": true
+  },
+  {
+    "name": "card",
+    "type": "int64",
+    "nullable": true
+  },
+  {
+    "name": "bbox",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "ocr_text",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "serial_ocr",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "ocr_mean_confidence",
+    "type": "double",
+    "nullable": true
+  },
+  {
+    "name": "serial",
+    "type": "int64",
+    "nullable": true
+  },
+  {
+    "name": "epic",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "relation_type",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "relation_name",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "house_number",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "age",
+    "type": "int64",
+    "nullable": true
+  },
+  {
+    "name": "gender",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "deletion_text_detected",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "status",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "review_flags",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "page_header",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "section_number",
+    "type": "int64",
+    "nullable": true
+  },
+  {
+    "name": "section_address",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "section_source",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "roll_component",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "is_deleted",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "is_modified",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "deletion_reason_code",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "marker_hash_correlation",
+    "type": "double",
+    "nullable": true
+  },
+  {
+    "name": "serial_without_marker",
+    "type": "double",
+    "nullable": true
+  }
+]

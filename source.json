@@ -1,0 +1,177 @@
+{
+  "roll": "SIR Final Roll 2026",
+  "published": "2026-10-27",
+  "metadata_source": "https://github.com/gouthamganeshm/Karnataka_Final_Roll_2026",
+  "official_counts_source": "https://ceo.karnataka.gov.in/uploads/PDF%20FINAL%20AC%20WISE%2027_1793094730.pdf",
+  "url_template": "https://voters.eci.gov.in/eroll/2026/s10/sir-finalroll/{ac}/2026-EROLLGEN-S10-{ac}-SIR-FinalRoll-Revision1-{language}-{part}-WI.pdf",
+  "constituencies": [
+    {
+      "ac": 150,
+      "name": "Yelahanka",
+      "district": "BANGALORE URBAN",
+      "expected_parts": 418
+    },
+    {
+      "ac": 151,
+      "name": "K.R. Pura",
+      "district": "B.B.M.P(NORTH)",
+      "expected_parts": 509
+    },
+    {
+      "ac": 152,
+      "name": "Byatarayanapura",
+      "district": "BANGALORE URBAN",
+      "expected_parts": 442
+    },
+    {
+      "ac": 153,
+      "name": "Yeshwanthapura",
+      "district": "BANGALORE URBAN",
+      "expected_parts": 553
+    },
+    {
+      "ac": 154,
+      "name": "Rajarajeshwarinagar",
+      "district": "B.B.M.P(CENTRAL)",
+      "expected_parts": 437
+    },
+    {
+      "ac": 155,
+      "name": "Dasarahalli",
+      "district": "BANGALORE URBAN",
+      "expected_parts": 419
+    },
+    {
+      "ac": 156,
+      "name": "Mahalakshmi Layout",
+      "district": "B.B.M.P(NORTH)",
+      "expected_parts": 276
+    },
+    {
+      "ac": 157,
+      "name": "Malleshwaram",
+      "district": "B.B.M.P(NORTH)",
+      "expected_parts": 207
+    },
+    {
+      "ac": 158,
+      "name": "Hebbal",
+      "district": "B.B.M.P(NORTH)",
+      "expected_parts": 285
+    },
+    {
+      "ac": 159,
+      "name": "Pulakeshinagar",
+      "district": "B.B.M.P(NORTH)",
+      "expected_parts": 228
+    },
+    {
+      "ac": 160,
+      "name": "Sarvagnanagar",
+      "district": "B.B.M.P(NORTH)",
+      "expected_parts": 337
+    },
+    {
+      "ac": 161,
+      "name": "C.V. RamannNagar",
+      "district": "B.B.M.P(NORTH)",
+      "expected_parts": 244
+    },
+    {
+      "ac": 162,
+      "name": "Shivajinagar",
+      "district": "B.B.M.P(CENTRAL)",
+      "expected_parts": 191
+    },
+    {
+      "ac": 163,
+      "name": "Shantinagar",
+      "district": "B.B.M.P(CENTRAL)",
+      "expected_parts": 193
+    },
+    {
+      "ac": 164,
+      "name": "Gandhinagar",
+      "district": "B.B.M.P(CENTRAL)",
+      "expected_parts": 220
+    },
+    {
+      "ac": 165,
+      "name": "Rajajinagar",
+      "district": "B.B.M.P(CENTRAL)",
+      "expected_parts": 194
+    },
+    {
+      "ac": 166,
+      "name": "Govindarajanagar",
+      "district": "B.B.M.P(SOUTH)",
+      "expected_parts": 269
+    },
+    {
+      "ac": 167,
+      "name": "Vijayanagar",
+      "district": "B.B.M.P(SOUTH)",
+      "expected_parts": 284
+    },
+    {
+      "ac": 168,
+      "name": "Chamrajapet",
+      "district": "B.B.M.P(CENTRAL)",
+      "expected_parts": 216
+    },
+    {
+      "ac": 169,
+      "name": "Chickpet",
+      "district": "B.B.M.P(CENTRAL)",
+      "expected_parts": 222
+    },
+    {
+      "ac": 170,
+      "name": "Basavanagudi",
+      "district": "B.B.M.P(SOUTH)",
+      "expected_parts": 220
+    },
+    {
+      "ac": 171,
+      "name": "Padmanabanagar",
+      "district": "B.B.M.P(SOUTH)",
+      "expected_parts": 279
+    },
+    {
+      "ac": 172,
+      "name": "B.T.M Layout",
+      "district": "B.B.M.P(SOUTH)",
+      "expected_parts": 243
+    },
+    {
+      "ac": 173,
+      "name": "Jayanagar",
+      "district": "B.B.M.P(SOUTH)",
+      "expected_parts": 210
+    },
+    {
+      "ac": 174,
+      "name": "Mahadevapura",
+      "district": "BANGALORE URBAN",
+      "expected_parts": 533
+    },
+    {
+      "ac": 175,
+      "name": "Bommanahalli",
+      "district": "B.B.M.P(SOUTH)",
+      "expected_parts": 390
+    },
+    {
+      "ac": 176,
+      "name": "Bangalore South",
+      "district": "BANGALORE URBAN",
+      "expected_parts": 605
+    },
+    {
+      "ac": 177,
+      "name": "Anekal",
+      "district": "BANGALORE URBAN",
+      "expected_parts": 384
+    }
+  ]
+}

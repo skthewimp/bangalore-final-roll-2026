@@ -1,0 +1,176 @@
+{
+  "snapshot_date": "2026-11-05",
+  "reason": "Owner accepted residual cover OCR and small count/deletion discrepancies. No counts or deletion flags were invented to force reconciliation.",
+  "booths": [
+    {
+      "ac": 152,
+      "part": 229,
+      "pdf_sha256": "ce458c6a383e75d8e786d2e4c9f4565f05b78fe25728e699bce03e1381500670",
+      "rows": 566,
+      "deleted": 6,
+      "problems": [
+        "deletion flags disagree with printed deletion count",
+        "retained cards disagree with printed net electors"
+      ]
+    },
+    {
+      "ac": 155,
+      "part": 134,
+      "pdf_sha256": "db2d053506dccc6f55bc54c71a509039c983a5c1ff4034bdddc216fc5009b61d",
+      "rows": 570,
+      "deleted": 18,
+      "problems": [
+        "deletion flags disagree with printed deletion count",
+        "retained cards disagree with printed net electors"
+      ]
+    },
+    {
+      "ac": 155,
+      "part": 400,
+      "pdf_sha256": "997fd94d9c7378a52bed32dbfc8d28d1e2de5a75d53d2490bf6ce557f9552e5f",
+      "rows": 364,
+      "deleted": 1,
+      "problems": [
+        "detected cards disagree with printed serial range",
+        "retained cards disagree with printed net electors"
+      ]
+    },
+    {
+      "ac": 159,
+      "part": 59,
+      "pdf_sha256": "4279bebc846bb6d7a536db1f639a22aa619aa7ace2f8022ee81306d2f6075802",
+      "rows": 779,
+      "deleted": 4,
+      "problems": [
+        "cover counts lack independent OCR agreement"
+      ]
+    },
+    {
+      "ac": 164,
+      "part": 2,
+      "pdf_sha256": "5b402f18a789ff879506a4827fb6c515a2b14c97becd20845008d20b06801e7c",
+      "rows": 1152,
+      "deleted": 12,
+      "problems": [
+        "cover counts lack independent OCR agreement"
+      ]
+    },
+    {
+      "ac": 169,
+      "part": 208,
+      "pdf_sha256": "e08a4a5ae1514bf9e2ca99266783fe30ea32b6f36af302b60ef4260c8aa7e2dd",
+      "rows": 1129,
+      "deleted": 18,
+      "problems": [
+        "cover counts lack independent OCR agreement"
+      ]
+    },
+    {
+      "ac": 170,
+      "part": 155,
+      "pdf_sha256": "6144b07311ad87465b9b71d59bb99f0ba9c63754da449c90eb341876038eac82",
+      "rows": 574,
+      "deleted": 9,
+      "problems": [
+        "deletion flags disagree with printed deletion count",
+        "retained cards disagree with printed net electors"
+      ]
+    },
+    {
+      "ac": 171,
+      "part": 34,
+      "pdf_sha256": "9b7d03453ff7118fb2c6e59dfb9f6d6601406451272c1b0a22a956b2ae87ae69",
+      "rows": 868,
+      "deleted": 2,
+      "problems": [
+        "cover counts lack independent OCR agreement"
+      ]
+    },
+    {
+      "ac": 174,
+      "part": 177,
+      "pdf_sha256": "4d807c6e4c5f45af34c2ba4529175c0ee5030a9da4da7de1ae766494ba2853b1",
+      "rows": 801,
+      "deleted": 35,
+      "problems": [
+        "deletion flags disagree with printed deletion count",
+        "retained cards disagree with printed net electors"
+      ]
+    },
+    {
+      "ac": 174,
+      "part": 91,
+      "pdf_sha256": "436033e2f74a14e1f395b0d36600ecb73ec2f23613d3aea40d02d2b9ef8d8134",
+      "rows": 777,
+      "deleted": 0,
+      "problems": [
+        "cover counts lack independent OCR agreement"
+      ]
+    },
+    {
+      "ac": 176,
+      "part": 304,
+      "pdf_sha256": "5e9e5bd630038950d1b240fc9f1bc075ad49b97e74f9d87fe2692fbd9c9a0f55",
+      "rows": 785,
+      "deleted": 6,
+      "problems": [
+        "printed gender counts do not sum to net",
+        "printed count arithmetic inconsistent",
+        "deletion flags disagree with printed deletion count",
+        "retained cards disagree with printed net electors"
+      ]
+    },
+    {
+      "ac": 176,
+      "part": 387,
+      "pdf_sha256": "6850395aad484975c164e6b2887fa6ca4b63397bb2fd49ec1bb0f72bb2dfd19f",
+      "rows": 791,
+      "deleted": 16,
+      "problems": [
+        "cover counts lack independent OCR agreement"
+      ]
+    },
+    {
+      "ac": 176,
+      "part": 480,
+      "pdf_sha256": "06a2ea6f09f83728a86e32d079148608db505b6363e168445d72d6c1ce06bc84",
+      "rows": 661,
+      "deleted": 18,
+      "problems": [
+        "detected cards disagree with printed serial range",
+        "deletion flags disagree with printed deletion count"
+      ]
+    },
+    {
+      "ac": 176,
+      "part": 581,
+      "pdf_sha256": "6ba0f756be7cbefe3696230315099956a14d26d24bab7a70a7f8ef035ed87cf0",
+      "rows": 316,
+      "deleted": 0,
+      "problems": [
+        "deletion flags disagree with printed deletion count",
+        "retained cards disagree with printed net electors"
+      ]
+    },
+    {
+      "ac": 177,
+      "part": 280,
+      "pdf_sha256": "b339f3fbf5d087aa0807492b751224fd66902289ccb22fd62776890d01504ad2",
+      "rows": 775,
+      "deleted": 1,
+      "problems": [
+        "cover counts lack independent OCR agreement"
+      ]
+    },
+    {
+      "ac": 177,
+      "part": 73,
+      "pdf_sha256": "f7d0ff71046f9e51b8950a605c47159ebe594139a309d27d864b5d220a417ab5",
+      "rows": 782,
+      "deleted": 7,
+      "problems": [
+        "cover counts lack independent OCR agreement"
+      ]
+    }
+  ]
+}

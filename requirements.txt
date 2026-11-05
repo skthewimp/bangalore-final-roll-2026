@@ -1,0 +1,8 @@
+# Versions used for the November 2026 extraction and review.
+numpy==2.4.0
+scipy==1.16.3
+pillow==12.1.0
+pymupdf==1.27.2.2
+pandas==2.3.3
+pyarrow==22.0.0
+requests==2.32.5
