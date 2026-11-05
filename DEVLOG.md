@@ -90,8 +90,9 @@ promise. The public count release does not expose the detailed person records.
 
 ### Work done
 - Done. `data/` now has **28 Parquet files**, one per constituency: `ac_150.parquet`, etc. - Reduced from **9,008 files** and **729 MB → 545 MB**. - Preserved all **5,974,040 records** and booth metadata; verified every...
-- Touched files: `README.md`, `code/combine_data.py`, `notebooks/arrow_constituencies.Rmd`, `notebooks/arrow_duckdb_ages.Rmd`, `notebooks/duckdb_booths.Rmd`
+- Touched files: `.gitignore`, `README.md`, `code/combine_data.py`, `notebooks/arrow_constituencies.Rmd`, `notebooks/arrow_duckdb_ages.Rmd`, `notebooks/duckdb_booths.Rmd`
+- .gitignore | 1 -
 - README.md | 15 +++++++++------
-- code/combine_data.py | 4 ++--
 
 <!-- codex-session:01a1aa36-fb23-7371-a694-9b2b4d91f535:end -->
+
