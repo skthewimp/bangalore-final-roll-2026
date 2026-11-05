@@ -81,3 +81,17 @@ promise. The public count release does not expose the detailed person records.
 - `polling_area_details` and `polling_station_details` contain the **raw multiline header text** from the roll. Their structured versions remain in the CSV. For the first row: | Removed column | Example content | Kept a...
 
 <!-- codex-session:01a1aa1c-7110-7ae1-b8f5-bf523e823af1:end -->
+
+<!-- codex-session:01a1aa36-fb23-7371-a694-9b2b4d91f535:start -->
+## 2026-11-05 11:08 IST | Codex session `01a1aa36-fb2`
+
+### User prompts
+> the parquet structure of @data is bad. way too many files. we shuld just combine into 1 parquet file per constituency orsomething
+
+### Work done
+- Done. `data/` now has **28 Parquet files**, one per constituency: `ac_150.parquet`, etc. - Reduced from **9,008 files** and **729 MB → 545 MB**. - Preserved all **5,974,040 records** and booth metadata; verified every...
+- Touched files: `README.md`, `code/combine_data.py`, `notebooks/arrow_constituencies.Rmd`, `notebooks/arrow_duckdb_ages.Rmd`, `notebooks/duckdb_booths.Rmd`
+- README.md | 15 +++++++++------
+- code/combine_data.py | 4 ++--
+
+<!-- codex-session:01a1aa36-fb23-7371-a694-9b2b4d91f535:end -->
